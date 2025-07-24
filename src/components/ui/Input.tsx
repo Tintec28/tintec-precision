@@ -1,13 +1,24 @@
 // src/components/ui/Input.tsx
 import React from 'react'
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps {
   label: string
   type?: 'text' | 'email' | 'tel'
   textarea?: boolean
   error?: boolean
   errorMessage?: string
   className?: string
+  // Props comunes para input y textarea
+  id?: string
+  name?: string
+  value?: string | number | readonly string[]
+  onChange?: React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  onBlur?: React.FocusEventHandler<HTMLInputElement | HTMLTextAreaElement>
+  placeholder?: string
+  required?: boolean
+  disabled?: boolean
+  rows?: number
+  maxLength?: number
 }
 
 const Input: React.FC<InputProps> = ({
@@ -31,7 +42,7 @@ const Input: React.FC<InputProps> = ({
       {textarea ? (
         <textarea
           className={`${inputClass} resize-none`}
-          {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
+          {...props}
         />
       ) : (
         <input
